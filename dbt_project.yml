@@ -1,0 +1,25 @@
+name: 'katapay_project'
+version: '1.0'
+config-version: 2
+
+profile: 'katapay_project'
+
+model-paths: ["models"]
+target-path: "target"
+clean-targets: ["target"]
+
+models:
+  katapay_project:
+    +materialized: view
+
+on-run-start:
+  - >
+    CREATE TABLE IF NOT EXISTS {{ target.schema }}.raw_transactions (
+      event_id    TEXT PRIMARY KEY,
+      event_type  TEXT,
+      timestamp   TIMESTAMP,
+      user_id     TEXT,
+      provider_id TEXT,
+      amount      NUMERIC,
+      currency    TEXT
+    );
