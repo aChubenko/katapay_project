@@ -2,5 +2,6 @@ version: 2
 
 sources:
   - name: katapay
+    schema: public
     tables:
       - name: raw_transactions

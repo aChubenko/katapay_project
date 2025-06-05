@@ -6,6 +6,6 @@ katapay_project:
       host: localhost
       user: airflow
       password: airflow
-      port: 5432
+      port: 5440
       dbname: katapay
       schema: public
