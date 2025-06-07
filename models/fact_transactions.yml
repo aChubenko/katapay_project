@@ -7,10 +7,13 @@ models:
         tests:
           - unique
           - not_null
+
       - name: event_type
         tests:
+          - not_null
           - accepted_values:
-              values: ['authorization', 'settlement']
+              values: ["authorization", "settlement"]
+
       - name: timestamp
         tests:
           - not_null
