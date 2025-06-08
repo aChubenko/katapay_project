@@ -44,17 +44,20 @@ services:
     volumes:
       - airbyte_db_data:/var/lib/postgresql/data
 
+
   superset:
     image: apache/superset:3.0.0
     container_name: katapay_superset
     environment:
       - SUPERSET_DATABASE_URI=postgresql+psycopg2://airflow:airflow@postgres:5432/katapay
+      - SUPERSET_SECRET_KEY=3B1blsL8UOq+e1tcMdh7qZ1aG5DcVP8qThFV4mPdE7o=
     ports:
       - "8088:8088"
     depends_on:
       - postgres
     volumes:
       - superset_home:/app/superset_home
+      - ./superset_config.py:/app/pythonpath/superset_config.py
     command: >
       /bin/sh -c "
       superset db upgrade &&

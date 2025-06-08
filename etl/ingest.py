@@ -16,9 +16,6 @@ def load_json(file_path):
     with open(file_path, "r", encoding="utf-8") as f:
         return json.load(f)
 
-def should_ingest(file_name):
-    return file_name.startswith("authorization_") or file_name.startswith("settlement_")
-
 def main():
     conn = psycopg2.connect(**PG_CONN)
     cur = conn.cursor()
@@ -28,8 +25,6 @@ def main():
 
 
     for file in DATA_DIR.glob("*.json"):
-        if not should_ingest(file.name):
-            continue
 
         try:
             event = load_json(file)

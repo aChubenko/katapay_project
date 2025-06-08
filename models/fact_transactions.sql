@@ -7,3 +7,5 @@ SELECT
   amount,
   currency
 FROM {{ source('katapay', 'raw_transactions') }}
+WHERE event_type IN ('authorization', 'settlement')
+
