@@ -6,6 +6,4 @@ SELECT
   provider_id,
   amount,
   currency
-FROM {{ source('katapay', 'raw_transactions') }}
-WHERE event_type IN ('authorization', 'settlement')
-
+FROM {{ ref('stg_transactions') }}

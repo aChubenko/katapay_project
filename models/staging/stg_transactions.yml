@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: stg_transactions
+    description: "Cleaned transactions: only authorization and settlement events, excluding orphaned settlements without a matching authorization."
+    columns:
+      - name: event_id
+        tests: [unique, not_null]
+      - name: event_type
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['authorization', 'settlement']
+      - name: timestamp
+        tests: [not_null]
+      - name: user_id
+        tests: [not_null]
+      - name: provider_id
+      - name: amount
+      - name: currency
