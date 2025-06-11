@@ -3,7 +3,7 @@ import json
 import psycopg2
 from pathlib import Path
 
-DATA_DIR = Path("../data/events")
+DATA_DIR = Path("data/events")
 PG_CONN = {
     "dbname": "katapay",
     "user": "airflow",
