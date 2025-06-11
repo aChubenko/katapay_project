@@ -14,37 +14,6 @@ services:
     volumes:
       - pg_data:/var/lib/postgresql/data
 
-  airbyte-webapp:
-    image: airbyte/webapp:0.50.1
-    container_name: katapay_airbyte_webapp
-    ports:
-      - "8000:8000"
-    depends_on:
-      - airbyte-server
-
-  airbyte-server:
-    image: airbyte/server:0.50.1
-    container_name: katapay_airbyte_server
-    ports:
-      - "8001:8001"
-    environment:
-      - AIRBYTE_ROLE=dev
-    volumes:
-      - airbyte_data:/data
-    depends_on:
-      - airbyte-db
-
-  airbyte-db:
-    image: postgres:13
-    container_name: katapay_airbyte_db
-    environment:
-      POSTGRES_DB: airbyte
-      POSTGRES_USER: docker
-      POSTGRES_PASSWORD: docker
-    volumes:
-      - airbyte_db_data:/var/lib/postgresql/data
-
-
   superset:
     image: apache/superset:3.0.0
     container_name: katapay_superset

@@ -6,6 +6,7 @@ profile: 'katapay_project'
 
 model-paths: ["models"]
 macro-paths: ["macros", "dbt_packages/dbt_synth_data/macros"]
+seed-paths: ["data"]
 target-path: "target"
 clean-targets: ["target"]
 
@@ -21,3 +22,10 @@ models:
 dispatch:
   - macro_namespace: dbt_synth_data
     search_order: [katapay_project, dbt_synth_data]
+
+seeds:
+  katapay_project:
+    holiday_list:
+      column_types:
+        date: date
+        holiday_name: text

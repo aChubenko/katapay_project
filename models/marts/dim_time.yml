@@ -1,0 +1,56 @@
+version: 2
+
+models:
+  - name: dim_time
+    description: >
+      Time dimension with hourly granularity, including weekend, holiday,
+      and time-of-day segment indicators.
+    columns:
+      - name: datetime
+        description: Unique timestamp (hourly)
+        tests:
+          - not_null
+          - unique
+
+      - name: date
+        description: Date without time
+        tests:
+          - not_null
+
+      - name: hour
+        description: Hour of day (0–23)
+        tests:
+          - not_null
+          - accepted_values:
+              values: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
+
+      - name: day_of_week_index
+        description: Day of week index (0=Sunday, 6=Saturday)
+        tests:
+          - not_null
+          - accepted_values:
+              values: [0,1,2,3,4,5,6]
+
+      - name: is_weekend
+        description: Boolean flag indicating weekend
+        tests:
+          - not_null
+
+      - name: is_holiday
+        description: Boolean flag indicating holiday
+        tests:
+          - not_null
+
+      - name: day_type
+        description: Categorical day type: Weekday / Weekend / Holiday
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Weekday', 'Weekend', 'Holiday']
+
+      - name: hour_segment
+        description: Time-of-day segment: Morning / Afternoon / Evening / Night
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Morning', 'Afternoon', 'Evening', 'Night']
