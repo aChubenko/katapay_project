@@ -42,14 +42,14 @@ models:
           - not_null
 
       - name: day_type
-        description: Categorical day type: Weekday / Weekend / Holiday
+        description: "Categorical day type: Weekday / Weekend / Holiday"
         tests:
           - not_null
           - accepted_values:
               values: ['Weekday', 'Weekend', 'Holiday']
 
       - name: hour_segment
-        description: Time-of-day segment: Morning / Afternoon / Evening / Night
+        description: "Time-of-day segment: Morning / Afternoon / Evening / Night"
         tests:
           - not_null
           - accepted_values:

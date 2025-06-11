@@ -15,7 +15,7 @@ models:
           - not_null
           - accepted_values:
               values: ['authorization', 'settlement']
-      - name: timestamp
+      - name: event_time
         tests: [not_null]
       - name: user_id
         tests: [not_null]
