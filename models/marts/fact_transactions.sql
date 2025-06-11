@@ -1,3 +1,3 @@
 SELECT *
-FROM {{ ref('stg_raw_transactions') }}
+FROM {{ ref('stg_synthetic_transactions') }}
 

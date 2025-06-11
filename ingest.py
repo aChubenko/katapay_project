@@ -16,16 +16,31 @@ def load_json(file_path):
     with open(file_path, "r", encoding="utf-8") as f:
         return json.load(f)
 
+def create_table_if_not_exists(cur):
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS raw_transactions (
+            event_id    TEXT PRIMARY KEY,
+            event_type  TEXT,
+            timestamp   TIMESTAMP,
+            user_id     TEXT,
+            provider_id TEXT,
+            amount      NUMERIC,
+            currency    TEXT
+        );
+    """)
+
 def main():
     conn = psycopg2.connect(**PG_CONN)
     cur = conn.cursor()
 
+    # ✅ создание таблицы при необходимости
+    create_table_if_not_exists(cur)
+    conn.commit()
+
     inserted = 0
     skipped = 0
 
-
     for file in DATA_DIR.glob("*.json"):
-
         try:
             event = load_json(file)
 

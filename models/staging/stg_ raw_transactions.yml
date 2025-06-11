@@ -1,0 +1,36 @@
+version: 2
+
+models:
+  - name: stg_raw_transactions
+    description: "Cleaned transactions: only authorization and settlement events, excluding orphaned settlements without a matching authorization."
+    columns:
+      - name: event_id
+        tests: [unique, not_null]
+      - name: event_type
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['authorization', 'settlement']
+      - name: timestamp
+        tests: [not_null]
+      - name: user_id
+        tests: [not_null]
+      - name: provider_id
+      - name: amount
+      - name: currency
+
+
+sources:
+  - name: public
+    tables:
+      - name: raw_transactions
+        description: "Ingested raw payment events from JSON or other sources"
+        columns:
+          - name: event_id
+            tests: [unique, not_null]
+          - name: event_type
+          - name: timestamp
+          - name: user_id
+          - name: provider_id
+          - name: amount
+          - name: currency

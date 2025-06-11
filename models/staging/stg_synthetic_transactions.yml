@@ -1,8 +1,12 @@
 version: 2
 
 models:
-  - name: stg_transactions
-    description: "Cleaned transactions: only authorization and settlement events, excluding orphaned settlements without a matching authorization."
+  - name: stg_synthetic_transactions
+    description: >
+      Staging model for synthetic payment events. 
+      Filters only 'authorization' and 'settlement' event types, 
+      casts timestamp to a consistent format, and prepares data for downstream fact models. 
+      Does not perform event matching or deduplication logic.
     columns:
       - name: event_id
         tests: [unique, not_null]

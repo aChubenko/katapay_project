@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: synthetic_transactions
+    description: >
+      Synthetic transaction data generated using dbt_synth_data.
+    columns:
+      - name: event_id
+        description: "Unique event identifier (UUID)"
+        tests:
+          - not_null
+          - unique
+
+      - name: event_type
+        description: "Either 'authorization' or 'settlement'"
+        tests:
+          - accepted_values:
+              values: ['authorization', 'settlement']
+
+      - name: timestamp
+        description: "Event timestamp"
+        tests:
+          - not_null
+
+      - name: user_id
+      - name: provider_id
+      - name: amount
+      - name: currency
